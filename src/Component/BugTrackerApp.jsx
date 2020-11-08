@@ -1,12 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import UserList from './UserList';
 import Home from './Home';
 import About from './About';
 import ProjectList from './ProjectList';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-
 const BugTrackerApp = () => {
+
+    const [active, setActive] = useState("Home");
+    const [remove, setRemove] = useState("Home");
+
+    useEffect(() => {     
+        let element = document.getElementById(active);
+        element.classList.add("active");
+        setRemove(active);
+    }, [active]);
+
+    useEffect(() => {
+        if (active !== remove)
+            document.getElementById(remove).classList.remove("active");
+    }, [active]);
+
     return (
         <Router>
             <nav className="navbar navbar-default">
@@ -15,17 +29,17 @@ const BugTrackerApp = () => {
                         <a className="navbar-brand" href="#">BugTrackerApp</a>
                     </div>
                     <ul className="nav navbar-nav">
-                        <li className="active">
-                            <Link to = "/">Home</Link>
+                        <li id="Home" className="active">
+                            <Link to = "/" onClick={()=>setActive("Home")}>Home</Link>
                         </li>
-                        <li>
-                            <Link to ="/users">Users</Link>
+                        <li id="Users">
+                            <Link to ="/users" onClick={()=>setActive("Users")}>Users</Link>
                         </li>
-                        <li>
-                            <Link to ="/projects">Your projects</Link>
+                        <li id="Projects">
+                            <Link to ="/projects" onClick={()=>setActive("Projects")}>Your projects</Link>
                         </li>
-                        <li>
-                            <Link to ="/About">About</Link>
+                        <li id="About">
+                            <Link to ="/About" onClick={()=>setActive("About")}>About</Link>
                         </li>
                     </ul>
                 </div>

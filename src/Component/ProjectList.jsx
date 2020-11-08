@@ -28,30 +28,31 @@ const ProjectList = () => {
   let match = useRouteMatch();
 
   return(<>
-    <div className="container">
-      <h3>Your projects</h3>
-      <div className="container">
-        <table className="table">
-        <thead>
-          <tr>
-            <th>Project Name</th>
-            <th>Your Role</th>
-          </tr>
-        </thead>
-        <tbody>
-          {
-            projects.map(project =>
-              <tr key = {project.id}>
-                <td><Link to ={`${match.url}/tasks/:id`}>{project.projectName}</Link></td>
-                <td>{project.role}</td>
-              </tr>  
-                )
-          }
-        </tbody>
-
-        </table>
-      </div>
-    </div>
+  <h3>Your projects</h3>
+  <input type="button" value="Create A New Project" className="btn btn-primary"/>
+  <table className="table">
+    <thead>
+      <tr>
+        <th>Project Name</th>
+        <th>Your Role</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {
+        projects.map(project =>
+          <tr key = {project.id}>
+            <td><Link to ={`${match.url}/:${project.id}`}>{project.projectName}</Link></td>
+            <td>{project.role}</td>
+            <td>
+              <input type="button" value="Edit" className="btn" />
+              <input type="button" value="Remove" className="btn btn-danger" style={{marginLeft: 5}}/>
+            </td>
+          </tr>  
+        )
+      }
+    </tbody>
+  </table>
 
     <Switch>
       <Route path={`${match.path}/:id`}>

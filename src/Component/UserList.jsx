@@ -26,16 +26,15 @@ const mockUsers = [
 const UserList = () => {
   const [users, setUsers] = useState(mockUsers); 
 
-  return (
-      <div className="container">
+  return (<>
         <h3>All Users</h3>
-        <div className="container">
           <table className="table">
             <thead>
               <tr>
                 <th>User Id</th>
                 <th>Username</th>
                 <th>Role</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
@@ -45,12 +44,14 @@ const UserList = () => {
                   <td>{user.id}</td>
                   <td>{user.username}</td>
                   <td>{user.role}</td>
+                  <td>
+                    <input type="button" value="Edit" className="btn"/>
+                    <input type="button" value="Remove" className="btn btn-danger" style={{marginLeft: 5}}/>
+                  </td>
                 </tr>)
               }
             </tbody>
           </table>
-        </div>
-      </div>
-    )
+    </>)
 }
 export default UserList
